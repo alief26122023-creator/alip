@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Selamat Ulang Tahun kia</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#001f4d,#004aad,#5da9ff);
+    min-height:100vh;
+    overflow-x:hidden;
+    color:white;
+    text-align:center;
+    position:relative;
+}
+
+/* Background Bintang */
+
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-2;
+}
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:0.2;
+    }
+    50%{
+        opacity:1;
+    }
+}
+
+/* Bubble */
+
+.bubble{
+    position:absolute;
+    bottom:-100px;
+    background:rgba(255,255,255,.15);
+    border-radius:50%;
+    animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+/* Container */
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+/* Judul */
+
+h1{
+    font-family:'Dancing Script',cursive;
+    font-size:4rem;
+    margin-top:40px;
+    text-shadow:0 0 20px rgba(255,255,255,.5);
+    animation:fadeIn 2s;
+}
+
+.subtitle{
+    margin-top:10px;
+    font-size:1.1rem;
+    font-weight:300;
+    opacity:.9;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Foto */
+
+.photo{
+    width:300px;
+    height:380px;
+    margin:40px auto;
+    border-radius:25px;
+    overflow:hidden;
+    border:4px solid rgba(255,255,255,.8);
+    box-shadow:
+    0 0 30px rgba(255,255,255,.4),
+    0 0 70px rgba(93,169,255,.5);
+    transition:.4s;
+}
+
+.photo:hover{
+    transform:scale(1.03);
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* Surat */
+
+.message{
+    max-width:750px;
+    margin:auto;
+    padding:30px;
+    border-radius:25px;
+    backdrop-filter:blur(12px);
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    line-height:2;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+/* Tombol */
+
+.buttons{
+    margin-top:30px;
+}
+
+button{
+    padding:14px 25px;
+    margin:10px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#004aad;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-5px);
+}
+
+.popup{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    color:#111;
+    padding:25px;
+    width:90%;
+    max-width:400px;
+    border-radius:20px;
+    z-index:999;
+}
+
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    font-size:25px;
+    z-index:999;
+}
+
+/* Hati */
+
+.heart{
+    position:fixed;
+    pointer-events:none;
+    animation:heartMove 2s forwards;
+}
+
+@keyframes heartMove{
+    from{
+        opacity:1;
+        transform:translateY(0);
+    }
+    to{
+        opacity:0;
+        transform:translateY(-120px);
+    }
+}
+
+/* Footer */
+
+.footer{
+    margin-top:60px;
+    padding:30px;
+    opacity:.8;
+}
+
+#typing{
+    white-space: pre-line;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 2;
+}
+
+#typing::after{
+    content: "|";
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity: 0;
+    }
+}
+.story-container{
+    width:320px;
+    height:550px;
+    margin:40px auto;
+    position:relative;
+    overflow:hidden;
+    border-radius:25px;
+    border:4px solid rgba(255,255,255,.8);
+    box-shadow:0 0 30px rgba(255,255,255,.3),
+    0 0 80px rgba(93,169,255,.5);
+}
+
+.story-slide{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    opacity:0;
+    transition:1s;
+}
+
+.story-slide.active{
+    opacity:1;
+}
+
+.story-progress{
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+    height:5px;
+    background:rgba(255,255,255,.3);
+    border-radius:10px;
+    z-index:100;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:white;
+    border-radius:10px;
+}
+
+.story-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.3);
+    color:white;
+    cursor:pointer;
+    z-index:100;
+}
+
+.left{
+    left:10px;
+}
+
+.right{
+    right:10px;
+}
+
+/* Tombol Buka Pesan */
+
+#startBtn{
+    margin-top:25px;
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#004aad;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(255,255,255,.4);
+    transition:.3s;
+}
+
+#startBtn:hover{
+    transform:translateY(-5px);
+}
+
+@media(max-width:768px){
+
+    h1{
+        font-size:2.8rem;
+    }
+
+    .photo{
+        width:240px;
+        height:320px;
+    }
+
+    .message{
+        padding:20px;
+    }
+
+    button{
+        width:90%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+<h1>Selamat Ulang Tahun kia 💙</h1>
+
+<p class="subtitle">
+Hari ini dunia bertambah satu tahun bersamamu.
+</p>
+
+<button id="startBtn" onclick="startWebsite()">
+    💙 Buka Pesan
+</button>
+
+<div class="story-container">
+
+    <div class="story-progress">
+        <div class="progress-bar"></div>
+    </div>
+
+    <img class="story-slide active" src="foto1.jpg">
+
+    <img class="story-slide" src="foto2.jpg">
+
+    <img class="story-slide" src="foto3.jpg">
+
+    <img class="story-slide" src="foto4.jpg">
+
+    <img class="story-slide" src="foto5.jpg">
+
+    <img class="story-slide" src="foto6.jpg">
+
+    <img class="story-slide" src="foto7.jpg">
+
+    <img class="story-slide" src="foto8.jpg">
+
+    <img class="story-slide" src="foto9.jpg">
+
+    <img class="story-slide" src="foto10.jpeg">
+
+    <button class="story-btn left" onclick="prevStory()">❮</button>
+
+    <button class="story-btn right" onclick="nextStory()">❯</button>
+
+</div>
+
+<div class="message">
+    <p id="typing">
+    </p>
+</div>
+
+<div class="buttons">
+
+<button onclick="showPopup('Kenangan tidak hilang, hanya berubah menjadi cerita.')">
+❤️ Kenangan
+</button>
+
+<button onclick="showPopup('Semoga semua cita-cita kia tercapai, dan semoga kia bisa tasmi 30 juz .')">
+🌟 Harapan
+</button>
+
+<button onclick="showPopup('Ada seseorang yang masih mendoakanmu diam-diam.')">
+🎁 Pesan Rahasia
+</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+Terima kasih pernah menjadi bagian dari cerita alip.
+</div>
+
+<div class="popup" id="popup">
+
+<p id="popupText"></p>
+
+<br>
+
+<button onclick="closePopup()">
+Tutup
+</button>
+
+</div>
+
+<button class="music-btn" onclick="toggleMusic()">
+🎵
+</button>
+
+<audio id="music" loop>
+<source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* Bintang */
+
+const stars=document.getElementById("stars");
+
+for(let i=0;i<150;i++){
+
+let star=document.createElement("div");
+
+star.classList.add("star");
+
+let size=Math.random()*4;
+
+star.style.width=size+"px";
+star.style.height=size+"px";
+
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+
+stars.appendChild(star);
+
+}
+
+/* Bubble */
+
+for(let i=0;i<20;i++){
+
+let bubble=document.createElement("div");
+
+bubble.classList.add("bubble");
+
+let size=Math.random()*60+20;
+
+bubble.style.width=size+"px";
+bubble.style.height=size+"px";
+
+bubble.style.left=Math.random()*100+"%";
+
+bubble.style.animationDuration=
+(Math.random()*15+10)+"s";
+
+document.body.appendChild(bubble);
+
+}
+
+/* Popup */
+
+function showPopup(text){
+
+document.getElementById("popupText").innerHTML=text;
+
+document.getElementById("popup").style.display="block";
+
+}
+
+function closePopup(){
+
+document.getElementById("popup").style.display="none";
+
+}
+
+/* Musik */
+
+let music=document.getElementById("music");
+let playing=false;
+
+function toggleMusic(){
+
+if(!playing){
+
+music.play();
+playing=true;
+
+}else{
+
+music.pause();
+playing=false;
+
+}
+
+}
+
+/* Efek Hati */
+
+document.addEventListener("click",function(e){
+
+let heart=document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="💙";
+
+heart.style.left=e.pageX+"px";
+heart.style.top=e.pageY+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},2000);
+
+});
+
+const text = `
+
+Selamat ulang tahun, Kia.
+
+Hari ini adalah hari spesial untuk kia, dan alip berharap semua hal baik datang menghampirimu.
+
+Semoga usia kia yang bertambah membawa lebih banyak kebahagiaan daripada kesedihan.
+
+Semoga setiap doa yang kia panjatkan menemukan jalannya untuk dikabulkan.
+
+Semoga setiap mimpi yang sedang kia perjuangkan perlahan menjadi kenyataan.
+
+alip tidak tahu apakah pesan ini akan berarti banyak bagi kia atau tidak.
+
+Tapi alip ingin memanfaatkan hari ini untuk menyampaikan sesuatu yang selama ini alip simpan.
+
+Terima kasih karena pernah menjadi bagian dari hidup alip.
+
+Terima kasih atas semua cerita yang pernah kita lalui bersama.
+
+Terima kasih atas semua tawa yang pernah kita bagi.
+
+Terima kasih atas semua kenangan yang sampai sekarang masih tersimpan dengan baik.
+
+Waktu telah berjalan cukup jauh sejak semuanya berubah.
+
+Banyak hal yang tidak lagi sama seperti dulu.
+
+Dan mungkin memang begitulah hidup berjalan.
+
+Kadang mempertemukan dua orang.
+
+Kadang juga membuat mereka berjalan di arah yang berbeda.
+
+alip tidak menulis ini untuk membuat kia merasa bersalah.
+
+alip juga tidak menulis ini untuk meminta kia kembali.
+
+alip hanya ingin jujur untuk sekali ini.
+
+Sampai hari ini, alip masih menyimpan rasa yang sama.
+
+alip masih mengingat kia dalam doa-doa alip.
+
+alip masih berharap kia selalu baik-baik saja.
+
+alip masih peduli meskipun tidak lagi memiliki tempat dalam hari kia.
+
+Namun alip sadar bahwa tidak semua hal yang kita inginkan harus kita miliki.
+
+Karena itu alip memilih untuk tidak mengganggu kia lagi.
+
+alip memilih menghargai ruang dan keputusan kia.
+
+alip memilih menyayangi kia dari kejauhan.
+
+alip memilih mendoakan kia tanpa harus hadir di setiap langkah kia.
+
+Dan alip memilih menunggu tanpa menuntut apa pun dari kia.
+
+Menunggu bukan berarti memaksa.
+
+Menunggu bukan berarti berharap kia harus kembali.
+
+Menunggu hanyalah cara alip menghargai seseorang yang pernah begitu berarti.
+
+Jika suatu hari nanti takdir mempertemukan kita lagi.
+
+alip akan menerimanya dengan rasa syukur.
+
+Jika suatu hari nanti jalan kita tetap berbeda.
+
+alip akan belajar menerimanya dengan ikhlas.
+
+Karena pada akhirnya yang paling penting adalah kebahagiaan kia.
+
+Meski kebahagiaan itu mungkin tidak bersama alip.
+
+alip hanya ingin melihat kia bahagia.
+
+alip hanya ingin melihat semua impian kia tercapai.
+
+alip hanya ingin hidup kia dipenuhi orang-orang yang menyayangi kia dengan tulus.
+
+Dan jika suatu hari kia mengingat alip.
+
+alip berharap kia mengingat alip sebagai seseorang yang pernah tulus mencintai kia.
+
+Bukan seseorang yang memaksakan keinginannya.
+
+Bukan seseorang yang mengganggu ketenangan kia.
+
+Melainkan seseorang yang memilih diam karena menghargai kia.
+
+Selamat ulang tahun, Kia.
+
+Semoga hari hari kia dipenuhi senyuman.
+
+Semoga setiap langkah kia selalu dimudahkan.
+
+Semoga hati kia selalu menemukan ketenangan.
+
+Dan semoga kia selalu menjadi alasan bagi diri kia sendiri untuk terus bahagia.
+
+alip tidak akan mengganggumu lagi.
+
+Tapi alip akan tetap mendoakan kia.
+
+Dan mungkin, di sudut hati yang paling tenang.
+
+alip masih menunggu kia . 
+
+❤️💙
+
+`;
+
+let i = 0;
+
+function typeWriter(){
+
+    if(i < text.length){
+
+        document.getElementById("typing").innerHTML += text.charAt(i);
+
+        i++;
+
+        setTimeout(typeWriter,40);
+    }
+}
+
+window.onload = typeWriter;
+
+const storySlides =
+document.querySelectorAll(".story-slide");
+
+const progress =
+document.querySelector(".progress-bar");
+
+let storyIndex = 0;
+
+function showStory(index){
+
+storySlides.forEach(slide=>{
+slide.classList.remove("active");
+});
+
+storySlides[index]
+.classList.add("active");
+
+progress.style.transition="none";
+progress.style.width="0%";
+
+setTimeout(()=>{
+progress.style.transition="5s linear";
+progress.style.width="100%";
+},50);
+
+}
+
+function nextStory(){
+
+storyIndex++;
+
+if(storyIndex >= storySlides.length){
+storyIndex = 0;
+}
+
+showStory(storyIndex);
+
+}
+
+function prevStory(){
+
+storyIndex--;
+
+if(storyIndex < 0){
+storyIndex = storySlides.length - 1;
+}
+
+showStory(storyIndex);
+
+}
+
+showStory(0);
+
+setInterval(nextStory,5000);
+
+function startWebsite(){
+
+    document.getElementById("music").play();
+
+    document.querySelector(".message")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+    document.getElementById("startBtn").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
